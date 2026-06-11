@@ -1,0 +1,179 @@
+.aula-form {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 18px;
+  background: var(--card-bg-color);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  padding: 18px;
+}
+
+.aula-form p {
+  margin: 0;
+}
+
+.aula-form p:last-of-type {
+  grid-column: 1 / -1;
+}
+
+.aula-form label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.aula-form input,
+.aula-form select {
+  width: 100%;
+  margin-top: 6px;
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  background: #fff;
+  color: var(--text-color);
+}
+
+.aula-form button {
+  grid-column: 1 / -1;
+  width: fit-content;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-weight: 600;
+  font-family: inherit;
+  color: #fff;
+  background: var(--primary-color);
+  cursor: pointer;
+}
+
+.aula-form button:hover {
+  filter: brightness(0.95);
+}
+
+.minhas-aulas {
+  width: 100%;
+  margin-top: 8px;
+  padding: 30px 6px 12px;
+}
+
+.minhas-aulas h2 {
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  color: var(--text-color);
+  margin-bottom: 22px;
+  font-weight: 600;
+}
+
+.aulas-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.aula-card {
+  background: var(--card-bg-color);
+  border: 1px solid var(--border-soft);
+  border-left: 6px solid var(--primary-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  padding: 22px;
+  min-height: 170px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.aula-card h3 {
+  color: #2f3a2c;
+  font-size: 1.2rem;
+  margin-bottom: 2px;
+}
+
+.aula-meta {
+  color: var(--text-soft);
+  font-size: 0.96rem;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.aula-meta .label {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.status {
+  margin-top: auto;
+  align-self: flex-start;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.status-pendente {
+  background: #f3eedf;
+  color: #7a6641;
+}
+
+.status-andamento {
+  background: #e4eee0;
+  color: #496045;
+}
+
+.status-concluida {
+  background: #dce8d7;
+  color: #2f4a2e;
+}
+
+.aula-actions {
+  margin-top: 8px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.aula-actions button {
+  border: none;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.btn-concluir {
+  background: #dce8d7;
+  color: #2f4a2e;
+}
+
+.btn-excluir {
+  background: #f8d9d9;
+  color: #7a2f2f;
+}
+
+@media (max-width: 680px) {
+  .aula-form {
+    grid-template-columns: 1fr;
+    padding: 14px;
+  }
+
+  .aulas-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .minhas-aulas {
+    padding: 18px 2px 8px;
+  }
+
+  .aula-card {
+    padding: 18px;
+  }
+}

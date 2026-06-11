@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="assets/css/progresso.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="assets/images/fav.ico" type="image/x-icon">
+  <title>Foca Lá | Meu Progresso</title>
+</head>
+<body>
+  <header class="site-nav">
+    <div class="site-nav-inner">
+      <a href="index.html" class="nav-brand">Foca Lá</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav-links">
+        Menu
+      </button>
+      <ul id="main-nav-links" class="nav-links">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="aulas.html">Minhas Aulas</a></li>
+        <li><a href="agenda.html">Agenda</a></li>
+        <li><a href="progresso.html">Meu Progresso</a></li>
+      </ul>
+    </div>
+  </header>
+  <main class="container progress-page">
+    <section class="header">
+      <h1>Meu Progresso</h1>
+      <p>Uma visão clara das suas conquistas para manter seu foco com tranquilidade.</p>
+    </section>
+
+    <section class="progress-dashboard" aria-labelledby="progress-title">
+      <h2 id="progress-title">Resumo da Semana</h2>
+
+      <div class="stats-grid" role="list">
+        <article class="stat-card" role="listitem" aria-live="polite">
+          <h3>Completed Tasks</h3>
+          <p id="completed-tasks" class="stat-value">0</p>
+        </article>
+
+        <article class="stat-card" role="listitem" aria-live="polite">
+          <h3>Focus Hours</h3>
+          <p id="focus-hours" class="stat-value">0h</p>
+        </article>
+
+        <article class="stat-card" role="listitem" aria-live="polite">
+          <h3>Productive Days</h3>
+          <p id="productive-days" class="stat-value">0</p>
+        </article>
+      </div>
+
+      <article class="progress-block" aria-labelledby="weekly-progress-title">
+        <h3 id="weekly-progress-title">Progresso semanal de tarefas</h3>
+        <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Progresso semanal">
+          <div id="weekly-progress-fill" class="progress-fill"></div>
+        </div>
+        <p id="weekly-progress-text" class="progress-text">0% das tarefas da semana concluídas</p>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2024 Foca Lá. Todos os direitos reservados.
+  </footer>
+
+  <script src="assets/scripts/navigation.js"></script>
+  <script src="assets/scripts/progresso.js"></script>
+</body>
+</html>

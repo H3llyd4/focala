@@ -1,0 +1,116 @@
+.agenda-section {
+  width: 100%;
+  background: var(--card-bg-color);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: 28px;
+}
+
+.agenda-section h2 {
+  font-size: clamp(1.3rem, 2.8vw, 1.7rem);
+  color: var(--text-color);
+}
+
+.task-form {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr auto;
+  gap: 12px;
+  margin: 20px 0 24px;
+}
+
+.task-form input,
+.task-form select {
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 0.95rem;
+  color: var(--text-color);
+  background: #fff;
+}
+
+.task-form input:focus,
+.task-form select:focus {
+  outline: 2px solid var(--focus);
+  outline-offset: 1px;
+}
+
+.task-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.task-card {
+  background: #fff;
+  border: 1px solid var(--border-soft);
+  border-left: 6px solid var(--primary-color);
+  border-radius: 14px;
+  padding: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.task-main h3 {
+  font-size: 1.04rem;
+  color: #2f3a2c;
+  margin-bottom: 6px;
+}
+
+.task-date {
+  color: var(--text-soft);
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+.task-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.task-card.is-completed {
+  opacity: 0.72;
+  background: #f8faf7;
+  border-left-color: #b9c8b4;
+}
+
+.task-card.is-completed .task-main h3 {
+  font-weight: 500;
+}
+
+.task-empty {
+  padding: 18px;
+  border: 1px dashed var(--border-soft);
+  border-radius: 12px;
+  color: var(--text-soft);
+  background: #fcfdfb;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+@media (max-width: 680px) {
+  .task-form {
+    grid-template-columns: 1fr;
+  }
+
+  .task-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .task-actions {
+    width: 100%;
+  }
+}

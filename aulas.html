@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="assets/css/aulas.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="assets/images/fav.ico" type="image/x-icon">
+  <title>Foca Lá | Minhas Aulas</title>
+</head>
+<body>
+  <header class="site-nav">
+    <div class="site-nav-inner">
+      <a href="index.html" class="nav-brand">Foca Lá</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav-links">
+        Menu
+      </button>
+      <ul id="main-nav-links" class="nav-links">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="aulas.html">Minhas Aulas</a></li>
+        <li><a href="agenda.html">Agenda</a></li>
+        <li><a href="progresso.html">Meu Progresso</a></li>
+      </ul>
+    </div>
+  </header>
+  <main class="container aulas-page">
+    <section class="header">
+      <h1>Minha Rotina de Aulas</h1>
+      <p>Organize suas disciplinas em blocos claros para estudar com mais foco e menos sobrecarga.</p>
+    </section>
+
+    <section class="header" aria-labelledby="nova-aula-titulo">
+      <h2 id="nova-aula-titulo">Adicionar Aula</h2>
+      <form id="aula-form" class="aula-form">
+        <p>
+          <label for="aula-materia">Matéria</label><br>
+          <input id="aula-materia" name="materia" type="text" required>
+        </p>
+        <p>
+          <label for="aula-professor">Professor</label><br>
+          <input id="aula-professor" name="professor" type="text" required>
+        </p>
+        <p>
+          <label for="aula-horario">Horário</label><br>
+          <input id="aula-horario" name="horario" type="text" placeholder="Ex: Seg/Qua - 10:00" required>
+        </p>
+        <p>
+          <label for="aula-status">Status</label><br>
+          <select id="aula-status" name="status">
+            <option value="Pendente">Pendente</option>
+            <option value="Em Andamento">Em Andamento</option>
+            <option value="Concluída">Concluída</option>
+          </select>
+        </p>
+        <button type="submit">Adicionar aula</button>
+      </form>
+    </section>
+
+    <section id="minhas-aulas" class="minhas-aulas" aria-labelledby="minhas-aulas-titulo">
+      <h2 id="minhas-aulas-titulo">Minhas Aulas</h2>
+      <ul id="aulas-lista" class="aulas-grid"></ul>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2024 Foca Lá. Todos os direitos reservados.
+  </footer>
+
+  <script src="assets/scripts/navigation.js"></script>
+  <script src="assets/scripts/aula.js"></script>
+</body>
+</html>

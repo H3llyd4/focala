@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/global.css">
+  <link rel="stylesheet" href="assets/css/agenda.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="assets/images/fav.ico" type="image/x-icon">
+  <title>Foca Lá | Agenda</title>
+</head>
+<body>
+  <header class="site-nav">
+    <div class="site-nav-inner">
+      <a href="index.html" class="nav-brand">Foca Lá</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav-links">
+        Menu
+      </button>
+      <ul id="main-nav-links" class="nav-links">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="aulas.html">Minhas Aulas</a></li>
+        <li><a href="agenda.html">Agenda</a></li>
+        <li><a href="progresso.html">Meu Progresso</a></li>
+      </ul>
+    </div>
+  </header>
+  <main class="container agenda-page">
+    <section class="header">
+      <h1>Minha Agenda</h1>
+      <p>Foco no agora: organize seus próximos passos de forma simples e clara.</p>
+    </section>
+
+    <section id="agenda" class="agenda-section" aria-labelledby="agenda-titulo">
+      <h2 id="agenda-titulo">Planejador Diário</h2>
+
+      <form id="task-form" class="task-form">
+        <label for="task-title" class="sr-only">Nome da tarefa</label>
+        <input id="task-title" name="title" type="text" placeholder="Ex: Revisar capítulo de História" required>
+
+        <label for="task-date" class="sr-only">Data da tarefa</label>
+        <input id="task-date" name="date" type="date" required>
+
+        <label for="task-category" class="sr-only">Categoria da tarefa</label>
+        <select id="task-category" name="category" required>
+          <option value="Estudo">Estudo</option>
+          <option value="Trabalho">Trabalho</option>
+          <option value="Prova">Prova</option>
+        </select>
+
+        <button type="submit" class="btn-primary">Adicionar</button>
+      </form>
+
+      <ul id="task-list" class="task-list" aria-live="polite"></ul>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2024 Foca Lá. Todos os direitos reservados.
+  </footer>
+
+  <script src="assets/scripts/navigation.js"></script>
+  <script src="assets/scripts/agenda.js"></script>
+</body>
+</html>
