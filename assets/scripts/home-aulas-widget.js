@@ -1,21 +1,14 @@
 const HOME_AULAS_KEY = 'focala_aulas';
 
-const DEFAULT_AULAS = [
-  { id: 1, materia: 'Matemática', professor: 'Carlos', horario: 'Seg/Qua - 10:00', status: 'Pendente' },
-  { id: 2, materia: 'História', professor: 'Ana', horario: 'Ter - 08:00', status: 'Em Andamento' },
-  { id: 3, materia: 'Biologia', professor: 'Mariana', horario: 'Qui - 14:00', status: 'Concluída' },
-  { id: 4, materia: 'Química', professor: 'Rafael', horario: 'Sex - 09:30', status: 'Em Andamento' }
-];
-
 function getAulasForWidget() {
   const raw = localStorage.getItem(HOME_AULAS_KEY);
-  if (!raw) return DEFAULT_AULAS;
+  if (!raw) return [];
 
   try {
     const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) && parsed.length ? parsed : DEFAULT_AULAS;
+    return Array.isArray(parsed) ? parsed : [];
   } catch (_) {
-    return DEFAULT_AULAS;
+    return [];
   }
 }
 
@@ -43,8 +36,15 @@ function renderAulasWidget() {
   const pendentes = aulas.filter((aula) => normalizeStatus(aula.status) === 'pendente');
   const upcoming = pendentes.slice(0, 3);
 
-  countEl.textContent = `${pendentes.length} aulas pendentes`;
   listEl.innerHTML = '';
+
+  if (!aulas.length) {
+    countEl.textContent = 'Nenhuma aula cadastrada';
+    listEl.innerHTML = '<li class="task-empty">Nenhuma aula cadastrada.</li>';
+    return;
+  }
+
+  countEl.textContent = `${pendentes.length} aulas pendentes`;
 
   if (!upcoming.length) {
     listEl.innerHTML = '<li class="task-empty">Nenhuma aula pendente no momento.</li>';
