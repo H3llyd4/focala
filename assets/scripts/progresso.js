@@ -10,12 +10,24 @@ function getStoredTasks() {
   }
 }
 
-function isDateInCurrentWeek(dateString) {
-  const date = new Date(`${dateString}T00:00:00`);
-  const now = new Date();
+function parseTaskDate(dateString) {
+  if (!dateString || typeof dateString !== 'string') return null;
 
-  const day = now.getDay();
-  const diffToMonday = day === 0 ? -6 : 1 - day;
+  const [year, month, day] = dateString.split('-').map(Number);
+  if (!year || !month || !day) return null;
+
+  const parsed = new Date(year, month - 1, day);
+  if (Number.isNaN(parsed.getTime())) return null;
+
+  parsed.setHours(0, 0, 0, 0);
+  return parsed;
+}
+
+function getCurrentWeekRange() {
+  const now = new Date();
+  const currentDay = now.getDay();
+  const diffToMonday = currentDay === 0 ? -6 : 1 - currentDay;
+
   const startOfWeek = new Date(now);
   startOfWeek.setDate(now.getDate() + diffToMonday);
   startOfWeek.setHours(0, 0, 0, 0);
@@ -24,7 +36,17 @@ function isDateInCurrentWeek(dateString) {
   endOfWeek.setDate(startOfWeek.getDate() + 6);
   endOfWeek.setHours(23, 59, 59, 999);
 
-  return date >= startOfWeek && date <= endOfWeek;
+  return { startOfWeek, endOfWeek };
+}
+
+function isDateInCurrentWeek(dateString) {
+  const parsedDate = parseTaskDate(dateString);
+  if (!parsedDate) return false;
+
+  const { startOfWeek, endOfWeek } = getCurrentWeekRange();
+  const timestamp = parsedDate.getTime();
+
+  return timestamp >= startOfWeek.getTime() && timestamp <= endOfWeek.getTime();
 }
 
 function getProductiveDays(tasks) {
@@ -37,19 +59,66 @@ function getProductiveDays(tasks) {
 
 function calculateProgressData(tasks) {
   const completedTasks = tasks.filter((task) => task.completed).length;
-  const focusHours = completedTasks * 0.75;
+  const pendingCount = tasks.filter((task) => !task.completed).length;
   const productiveDays = getProductiveDays(tasks);
 
-  const weeklyTasks = tasks.filter((task) => task.date && isDateInCurrentWeek(task.date));
-  const weeklyCompleted = weeklyTasks.filter((task) => task.completed).length;
-  const weeklyProgress = weeklyTasks.length === 0 ? 0 : Math.round((weeklyCompleted / weeklyTasks.length) * 100);
+  const totalTasks = tasks.length;
+  const overallProgress = totalTasks === 0 ? 0 : Math.round((completedTasks / totalTasks) * 100);
 
   return {
     completedTasks,
-    focusHours,
+    pendingCount,
     productiveDays,
-    weeklyProgress
+    overallProgress
   };
+}
+
+function sortByDate(tasks) {
+  return [...tasks].sort((a, b) => {
+    const dateA = parseTaskDate(a.date);
+    const dateB = parseTaskDate(b.date);
+
+    if (!dateA && !dateB) return 0;
+    if (!dateA) return 1;
+    if (!dateB) return -1;
+
+    return dateA.getTime() - dateB.getTime();
+  });
+}
+
+function renderPendingTasks(tasks) {
+  const pendingListEl = document.getElementById('pending-tasks-list');
+  if (!pendingListEl) return;
+
+  const pendingTasks = sortByDate(tasks.filter((task) => !task.completed));
+  pendingListEl.innerHTML = '';
+
+  if (pendingTasks.length === 0) {
+    pendingListEl.innerHTML = '<li class="pending-empty">Nenhuma atividade pendente no momento.</li>';
+    return;
+  }
+
+  pendingTasks.forEach((task) => {
+    const item = document.createElement('li');
+    item.className = 'pending-task-item';
+
+    const dateFormatted = task.date
+      ? new Date(`${task.date}T00:00:00`).toLocaleDateString('pt-BR', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric'
+        })
+      : 'Sem data';
+
+    item.innerHTML = `
+      <div class="pending-task-content">
+        <h3>${task.title}</h3>
+        <p>${dateFormatted}${task.category ? ` • ${task.category}` : ''}</p>
+      </div>
+    `;
+
+    pendingListEl.appendChild(item);
+  });
 }
 
 function renderProgress() {
@@ -57,19 +126,31 @@ function renderProgress() {
   const data = calculateProgressData(tasks);
 
   const completedEl = document.getElementById('completed-tasks');
-  const focusHoursEl = document.getElementById('focus-hours');
+  const pendingCountEl = document.getElementById('pending-count');
   const productiveDaysEl = document.getElementById('productive-days');
   const progressFillEl = document.getElementById('weekly-progress-fill');
   const progressTextEl = document.getElementById('weekly-progress-text');
   const progressTrackEl = document.querySelector('.progress-track');
 
   completedEl.textContent = String(data.completedTasks);
-  focusHoursEl.textContent = `${data.focusHours.toFixed(1)}h`;
+  pendingCountEl.textContent = String(data.pendingCount);
   productiveDaysEl.textContent = String(data.productiveDays);
 
-  progressFillEl.style.width = `${data.weeklyProgress}%`;
-  progressTextEl.textContent = `${data.weeklyProgress}% das tarefas da semana concluídas`;
-  progressTrackEl.setAttribute('aria-valuenow', String(data.weeklyProgress));
+  const safeOverallProgress = Math.max(0, Math.min(100, Number(data.overallProgress) || 0));
+
+  if (progressFillEl) {
+    progressFillEl.style.width = `${safeOverallProgress}%`;
+  }
+
+  if (progressTextEl) {
+    progressTextEl.textContent = `${safeOverallProgress}% das atividades concluídas`;
+  }
+
+  if (progressTrackEl) {
+    progressTrackEl.setAttribute('aria-valuenow', String(safeOverallProgress));
+  }
+
+  renderPendingTasks(tasks);
 }
 
 renderProgress();

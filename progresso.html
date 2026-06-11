@@ -37,17 +37,17 @@
 
       <div class="stats-grid" role="list">
         <article class="stat-card" role="listitem" aria-live="polite">
-          <h3>Completed Tasks</h3>
+          <h3>Tarefas Concluídas</h3>
           <p id="completed-tasks" class="stat-value">0</p>
         </article>
 
         <article class="stat-card" role="listitem" aria-live="polite">
-          <h3>Focus Hours</h3>
-          <p id="focus-hours" class="stat-value">0h</p>
+          <h3>Atividades Pendentes</h3>
+          <p id="pending-count" class="stat-value">0</p>
         </article>
 
         <article class="stat-card" role="listitem" aria-live="polite">
-          <h3>Productive Days</h3>
+          <h3>Dias Produtivos</h3>
           <p id="productive-days" class="stat-value">0</p>
         </article>
       </div>
@@ -60,10 +60,17 @@
         <p id="weekly-progress-text" class="progress-text">0% das tarefas da semana concluídas</p>
       </article>
     </section>
+
+    <section class="pending-activities" aria-labelledby="pending-activities-title">
+      <h2 id="pending-activities-title">Atividades pendentes</h2>
+      <ul id="pending-tasks-list" class="pending-tasks-list" aria-live="polite">
+        <li class="pending-empty">Nenhuma atividade pendente no momento.</li>
+      </ul>
+    </section>
   </main>
 
   <footer>
-    &copy; 2024 Foca Lá. Todos os direitos reservados.
+    &copy; 2026 Lara Hélida. Todos os direitos reservados.
   </footer>
 
   <script src="assets/scripts/navigation.js"></script>

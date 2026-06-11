@@ -218,34 +218,57 @@ footer {
 @media (max-width: 860px) {
   .site-nav-inner {
     padding: 12px 18px;
+    position: relative;
   }
 
   .nav-toggle {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-  }
-
-  .nav-links {
-    display: none;
-    width: 100%;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
-    margin-top: 10px;
-  }
-
-  .nav-links.is-open {
-    display: flex;
+    min-height: 42px;
+    min-width: 72px;
   }
 
   .site-nav-inner {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 18px;
+    left: 18px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    margin-top: 0;
+    padding: 10px;
+    border: 1px solid var(--border-soft);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: var(--shadow-soft);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  }
+
+  .nav-links.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
   }
 
   .nav-links a {
     border-radius: 12px;
-    padding: 11px 12px;
+    padding: 12px 14px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
   }
 }
 
